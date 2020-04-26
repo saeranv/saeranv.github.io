@@ -1,0 +1,51 @@
+/*
+Notes:
+- ref is yaml.org
+- ctrl F5 to refresh css
+*/
+
+.content {
+    font-size: 125%;
+
+    max-width:750px;
+    word-wrap: break-word;
+    /* # Margin/Padding */
+    margin: left;
+    padding-top: 10px;
+    padding-left: 5px;
+    /* # For visual debuggin */
+    /*border: 3px solid #73AD21;*/
+}
+
+
+/*Title*/
+.nbk_directive {
+    color: black;
+}
+
+.nbk_doc_sep {
+    color: turquoise;
+}
+
+.nbk_key {
+    color: green;
+}
+
+.nbk_comment {
+    color: blue;
+}
+
+.nbk_grey {
+    color: grey;
+}
+
+.nbk_key_sep {
+    color: brown;
+}
+
+a:link, a:visited, a:active {
+    color: black;
+    text-decoration: underline;
+}
+
+
