@@ -1,8 +1,0 @@
-{% extends "base.html" %}
-{% block content %}
-    <span class="nbk_directive"><i>{{ page.date }}</i></span>
-    <span class="nbk_directive"><i>{{ page.title }}</i></span>
-    <br>
-    {{ page.body | safe | indent(4, first=False, blank=True) }}
-    <span class="_doc_sep">---</span>
-{% endblock content %}
