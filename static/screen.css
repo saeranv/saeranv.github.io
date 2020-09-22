@@ -5,16 +5,20 @@ Notes:
 */
 
 .content {
-    font-size: 125%;
 
     max-width:750px;
-    word-wrap: break-word;
+    overflow-wrap: normal;
     /* # Margin/Padding */
     margin: left;
     padding-top: 10px;
     padding-left: 5px;
     /* # For visual debuggin */
-    /*border: 3px solid #73AD21;*/
+    /* border: 3px solid #73AD21; */
+
+    /* from hackernews */
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 10pt;
+    color: #000;
 }
 
 
