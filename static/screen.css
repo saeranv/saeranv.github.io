@@ -15,12 +15,18 @@ Notes:
     /* # For visual debuggin */
     /* border: 3px solid #73AD21; */
 
-    /* from hackernews */
-    font-family: Verdana, Geneva, sans-serif;
+    /* from aaron swarz */
+    font-family: "Georgia";
     font-size: 10pt;
     color: #000;
 }
 
+
+/*Title*/
+.nbk_title {
+    color: black;
+    font-size: 15pt;
+}
 
 /*Title*/
 .nbk_directive {
@@ -36,7 +42,7 @@ Notes:
 }
 
 .nbk_comment {
-    color: blue;
+    color: black;
 }
 
 .nbk_grey {
@@ -49,7 +55,7 @@ Notes:
 
 a:link, a:visited, a:active {
     color: black;
-    text-decoration: underline;
+    text-decoration-color: grey;
 }
 
 
