@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Notes | Saeran Vasanthakumar</title>
+    <link rel="stylesheet" type="text/css" href="/static/screen.css" media="screen" />
+    <meta name="author" content="Saeran Vasanthakumar">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            extensions: ["tex2jax.js"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+            tex2jax: {
+                inlineMath: [ ['$','$'], ['\(','\)'] ],
+                displayMath: [ ['$$','$$'], ['\[','\]']],
+                skipTags: ["script","noscript","style","textarea", "code", "img src"],
+                processClass: 'content',
+                processEscapes: true
+            },
+            "HTML-CSS": { availableFonts: ["TeX"] }
+        });
+    </script>
+</head>
+<body>
+<span class="content">
+    <span class="nbk_title"><a href="/">Notes</a></span>
+    <span class="nbk_comment"></span>
+    <span class="nbk_comment">by Saeran Vasanthakumar</span>
+    <span class="_doc_sep">---</span>
+    
+    <span class="nbk_directive"><i>20/09/23 - Dynamic Modeling Thoughts</i></span>
+    <br>
+    For the past year I’ve been intermittently toying around with designing a
+    building energy model that attempts to predict real-time thermodynamic state
+    in response to changes in geometry and material. Typical energy modeling tools
+    require a user to rigorously abstract a building into a simplified set of
+    thermodynamic boundaries, properties, and processes, which are then integrated
+    over a given time period to represent a static representation of state. Of
+    course, with machine and statistical learning it’s possible to cut through
+    these abstractions and model energy flows in real-time. This isn’t a novel
+    idea, and there are numerous implementations of ML-based energy predictions
+    floating around, but I think there are various gaps in the problem domain that
+    could use further exploration.
+    
+    I am particularly interested in the idea of experimenting with composable ML
+    architectures that can dynamically model the spatial impact of geometry and
+    matter. Earlier this year, I made a proof-of-concept that predicted thermal
+    loads in simple shoe-box models with just a linear regression. I was able to
+    get some decent results, but quickly found that it suffered when trying to
+    account for the (nonlinear) impact of radiation. That was in March, and since
+    then I’ve been busy moving cities, and switching jobs to properly revisit the
+    problem - although I spend an inordinate amount of my day thinking about the
+    issue.
+    
+    Luckily, it looks like I might have an excuse to revisit the problem soon. The
+    purpose of this note was to revisit the problem domain and gather my
+    constantly-evolving thoughts on it. The next step will be to scope out a
+    simple, hackable problem that can serve as the next iteration of this idea of
+    a dynamic model.
+    
+    <br>
+<body>
+    <span class="_doc_sep">---</span>
+    <span class="nbk_grey">email: saeranv @ gmail dot com</span>
+    <span class="nbk_grey">git: <a href="https://github.com/saeranv/" style="color:grey;">github.com/saeranv</a></span>
+</body>
+
+</span>
+</body>
+</html>

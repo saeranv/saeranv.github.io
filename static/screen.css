@@ -6,6 +6,15 @@ Notes:
 
 .content {
 
+    /* This duplicates the 'pre' html tag.
+    'pre' disables mathjax so we'll define
+    style here. */
+    display: block;
+    unicode-bidi: embed;
+    white-space: pre;
+    display: block;
+
+    /* Non 'pre' stuff*/
     max-width:750px;
     overflow-wrap: normal;
     /* # Margin/Padding */
@@ -20,7 +29,6 @@ Notes:
     font-size: 10pt;
     color: #000;
 }
-
 
 /*Title*/
 .nbk_title {

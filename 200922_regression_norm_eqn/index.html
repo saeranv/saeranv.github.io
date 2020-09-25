@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Notes | Saeran Vasanthakumar</title>
+    <link rel="stylesheet" type="text/css" href="/static/screen.css" media="screen" />
+    <meta name="author" content="Saeran Vasanthakumar">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            extensions: ["tex2jax.js"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+            tex2jax: {
+                inlineMath: [ ['$','$'], ['\(','\)'] ],
+                displayMath: [ ['$$','$$'], ['\[','\]']],
+                skipTags: ["script","noscript","style","textarea", "code", "img src"],
+                processClass: 'content',
+                processEscapes: true
+            },
+            "HTML-CSS": { availableFonts: ["TeX"] }
+        });
+    </script>
+</head>
+<body>
+<span class="content">
+    <span class="nbk_title"><a href="/">Notes</a></span>
+    <span class="nbk_comment"></span>
+    <span class="nbk_comment">by Saeran Vasanthakumar</span>
+    <span class="_doc_sep">---</span>
+    
+    <span class="nbk_directive"><i>20/09/22 - Linear Regression as Geometric Projection [Draft]</i></span>
+    <br>
+    Work in Progress.
+    
+    In the context of regression, the normal equation \(B = (X.T X)-1 X.T y\) is
+    used to calculate regression coefficients t\hat minimize the sum of square
+    differences between the predictor and weighted feature vectors. This note
+    shows how by reformulating the linear regression problem as a geometric
+    problem, the normal equation is simply a component of the projection of
+    predictor \(y\) onto feature subspace \(X\) to get \(\hat{y}\).
+    
+    The regression problem is traditionally stated like this:
+    \( \hat{y} = X B \)
+    
+    A prediction \(\hat{y}\) is equal to the multiplication of design matrix X
+    (feature vectors) multiplied by coefficients \(B\).
+    
+    Our vector of observations is represented by \(y\), and is a noisy
+    representation of \(\hat{y}\) such that:
+    
+    \( y = \hat{y} + e \)
+    
+    \( where: \)
+    \( \hat{y} = X B \)
+    
+    Geometrically, this looks like this:
+    
+    &lt;img src=&#34;/static/images/geometry_regression_2.gif&#34; alt=&#34;&#34;&gt;
+    
+    \( y = X B + e \)
+    
+    The geometric perspective thus shows that the residual \(e = y - XB\) is
+    perpendicular to \(\hat{y}\). Thus:
+    
+    \( X.T (y - X B) = 0 \)
+    \( X.T (y - \hat{y}) = 0 \)
+    
+    Solve for B.
+    
+    \( X.T y - X.T X B = 0 \)
+    vX.T y = X.T X B \)
+    \( (X.T X)-1 X.T y = (X.T X)-1 (X.T X) B \)
+    \( (X.T X)-1 X.T y = B \)
+    \( B = (X.T X)-1 X.T y \)
+    
+    Multiply \(X\) by \(B\) to get \(\hat{y}\).
+    
+    Since \(\hat{y} = X B$\)
+    \( \hat{y} = X (X.T X)-1 X.T y \)
+    \( \hat{y} = P y \)
+    
+    P is a matrix that projects n-dimensional \(y\) onto n-1 dimensional \(X\)
+    hyperplane.
+    
+    \( P = X (X.T X)-1 X.T \)
+    \(    = X B \)
+    
+    So what is \(B$? X B\) = projection of \(y\) onto \(\hat{y}\).
+    <br>
+<body>
+    <span class="_doc_sep">---</span>
+    <span class="nbk_grey">email: saeranv @ gmail dot com</span>
+    <span class="nbk_grey">git: <a href="https://github.com/saeranv/" style="color:grey;">github.com/saeranv</a></span>
+</body>
+
+</span>
+</body>
+</html>

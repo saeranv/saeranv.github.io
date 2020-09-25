@@ -5,17 +5,36 @@
     <title>Notes | Saeran Vasanthakumar</title>
     <link rel="stylesheet" type="text/css" href="/static/screen.css" media="screen" />
     <meta name="author" content="Saeran Vasanthakumar">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            extensions: ["tex2jax.js"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+            tex2jax: {
+                inlineMath: [ ['$','$'], ['\(','\)'] ],
+                displayMath: [ ['$$','$$'], ['\[','\]']],
+                skipTags: ["script","noscript","style","textarea", "code", "img src"],
+                processClass: 'content',
+                processEscapes: true
+            },
+            "HTML-CSS": { availableFonts: ["TeX"] }
+        });
+    </script>
 </head>
-
 <body>
-<pre class="content">
+<span class="content">
     <span class="nbk_title"><a href="/">Notes</a></span>
     <span class="nbk_comment"></span>
     <span class="nbk_comment">by Saeran Vasanthakumar</span>
     <span class="_doc_sep">---</span>
     
     
-    <span class="nbk_comment">20/09/22 - <a href='200922_dynmod/index.html'>Dynamic Modeling Thoughts</a></span>
+    <span class="nbk_comment">20/09/23 - <a href='200923_dynmod/index.html'>Dynamic Modeling Thoughts</a></span>
+    
+    <span class="nbk_comment">20/09/22 - <a href='200922_regression_norm_eqn/index.html'>Linear Regression as Geometric Projection [Draft]</a></span>
     
 <body>
     <span class="_doc_sep">---</span>
@@ -23,6 +42,6 @@
     <span class="nbk_grey">git: <a href="https://github.com/saeranv/" style="color:grey;">github.com/saeranv</a></span>
 </body>
 
-</pre>
+</span>
 </body>
 </html>
