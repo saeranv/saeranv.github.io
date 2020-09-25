@@ -32,24 +32,26 @@
     <span class="_doc_sep">---</span>
     
     <span class="nbk_directive"><i>20/09/22 - Linear Regression as Geometric Projection [Draft]</i></span>
-    <br>
-    Work in Progress.
+    <!-- autoescape off to allow images. Debug why safe filter isn't working -->
     
-    In the context of regression, the normal equation \(B = (X.T X)-1 X.T y\) is
-    used to calculate regression coefficients t\hat minimize the sum of square
-    differences between the predictor and weighted feature vectors. This note
-    shows how by reformulating the linear regression problem as a geometric
-    problem, the normal equation is simply a component of the projection of
-    predictor \(y\) onto feature subspace \(X\) to get \(\hat{y}\).
+    Note: This note is still a draft.
+    
+    In the context of regression, the normal equation \(B = (X.T X)-1 X.T y\) is used to
+    calculate regression coefficients t\hat minimize the sum of square differences
+    between the predictor and weighted feature vectors. This note shows how by
+    reformulating the linear regression problem as a geometric problem, the normal
+    equation is simply a component of the projection of predictor \(y\) onto feature
+    subspace \(X\) to get \(\hat{y}\).
     
     The regression problem is traditionally stated like this:
+    
     \( \hat{y} = X B \)
     
-    A prediction \(\hat{y}\) is equal to the multiplication of design matrix X
-    (feature vectors) multiplied by coefficients \(B\).
+    A prediction \(\hat{y}\) is equal to the multiplication of design matrix X (feature
+    vectors) multiplied by coefficients \(B\).
     
-    Our vector of observations is represented by \(y\), and is a noisy
-    representation of \(\hat{y}\) such that:
+    Our vector of observations is represented by \(y\), and is a noisy representation of
+    \(\hat{y}\) such that:
     
     \( y = \hat{y} + e \)
     
@@ -58,7 +60,7 @@
     
     Geometrically, this looks like this:
     
-    &lt;img src=&#34;/static/images/geometry_regression_2.gif&#34; alt=&#34;&#34;&gt;
+    <img src="/static/images/geometry_regression_2.gif" alt="" width="300">
     
     \( y = X B + e \)
     
@@ -71,7 +73,7 @@
     Solve for B.
     
     \( X.T y - X.T X B = 0 \)
-    vX.T y = X.T X B \)
+    \(X.T y = X.T X B \)
     \( (X.T X)-1 X.T y = (X.T X)-1 (X.T X) B \)
     \( (X.T X)-1 X.T y = B \)
     \( B = (X.T X)-1 X.T y \)
@@ -88,8 +90,8 @@
     \( P = X (X.T X)-1 X.T \)
     \(    = X B \)
     
-    So what is \(B$? X B\) = projection of \(y\) onto \(\hat{y}\).
-    <br>
+    So what is \(B\)? Well, \(X B\) = projection of \(y\) onto \(\hat{y}\).
+    
 <body>
     <span class="_doc_sep">---</span>
     <span class="nbk_grey">email: saeranv @ gmail dot com</span>
