@@ -64,32 +64,37 @@
     Geometrically, one can think of the output vector y as belonging to a m-dimensional
     ambient space. Since m is greater then the rank of X, the feature matrix X contains n
     column vectors belonging to some hyperplane in m-dimensional space. The picture below
-    illustrates a y vector in 3-dimensional (m-dimensional) ambient space, and 2 (n)
-    3-dimensional column vectors that do not span the 3 dimensional space, since they
-    contain a rank of 2.
+    illustrates a concrete example of this, with a m = 3 and n = 2. The y vector sits in
+    3-dimensional ambient space, and X consists of two 3-dimensional column vectors that
+    sit in a 2-dimensional hyperplane.
     
     <img src="/static/images/geometry_regression_2.gif" alt="" width="300">
     
-    Therefore, yhat usually does not equal y, because feature matrix X does not contain
-    enough linearly independant vectors to solve the X B system. \(\hat{y}\) therefore
-    only represents the best prediction of y. It can be thought of as a noisy
-    representation of \(y\) that can be summed with an error term to equal y.
+    Already our geometric interpretation gives us some useful intuition about regression.
+    We can clearly see that no matter how we try and scale and combine the column vectors
+    in the X matrix, their combination (yhat) will not equal y, because feature matrix X
+    does not contain enough linearly independant vectors. \(\hat{y}\) therefore only
+    represents the best prediction of y. It can be thought of as a noisy representation
+    of \(y\) that can be summed with an error term to equal y.
     
     \( y = \hat{y} + e \)
     \( y = X B + e \)
     
-    In the context of regression, the normal equation \(B = (X^T X)^{-1} X^T y\) is used
-    to calculate a matrix \(B\) of coefficients that minimize the sum of square
-    differences between the feature matrix \(X\) and predictor vector \(y\). The linear
-    combination of \(B\) and (\X\) thus produces the predictor vector \(\hat{y}\).
+    Our geometric image shows us that yhat is a projection of predictor \(y\) onto
+    feature subspace \(X\). In the context of regression, the normal equation \(B = (X^T
+    X)^{-1} X^T y\) is used to calculate a matrix \(B\) of coefficients that minimize the
+    sum of square differences between the feature matrix \(X\) and predictor vector
+    \(y\). Geometrically, this works out to the projection of y onto the B hyperplane to
+    get yhat. We can solve for B by exploiting the orthongonal relationships between e
+    and yhat on the X hyperplane.
     
-    The geometric perspective thus shows that the residual \(e = y - XB\) is
-    perpendicular to \(\hat{y}\). Thus:
+    Specifically, since the residual \(e = y - XB\) is perpendicular to \(\hat{y}\), the
+    dot product between the two is zero.
     
     \( X.T (y - X B) = 0 \)
     \( X.T (y - \hat{y}) = 0 \)
     
-    Solve for B.
+    And that's it. Now just solve for B algebraically.
     
     \( X.T y - X.T X B = 0 \)
     \(X.T y = X.T X B \)
@@ -99,18 +104,15 @@
     
     Multiply \(X\) by \(B\) to get \(\hat{y}\).
     
+    Using this, we can also derive P a matrix that projects n-dimensional \(y\) onto the
+    \(X\) hyperplane.
+    
     Since \(\hat{y} = X B$\)
     \( \hat{y} = X (X.T X)-1 X.T y \)
     \( \hat{y} = P y \)
     
-    P is a matrix that projects n-dimensional \(y\) onto n-1 dimensional \(X\)
-    hyperplane.
-    
     \( P = X (X.T X)-1 X.T \)
     \(    = X B \)
-    
-    In the geometric context the normal equation is a component of the projection of
-    predictor \(y\) onto feature subspace \(X\) to get \(\hat{y}\).
     
 <body>
     <span class="_doc_sep">---</span>
