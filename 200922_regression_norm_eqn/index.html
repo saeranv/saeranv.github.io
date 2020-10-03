@@ -36,33 +36,52 @@
     
     Warning: This is a draft.
     
-    In the context of regression, the normal equation \(B = (X.T X)-1 X.T y\) is used to
-    calculate regression coefficients t\hat minimize the sum of square differences
-    between the predictor and weighted feature vectors. This note shows how by
-    reformulating the linear regression problem as a geometric problem, the normal
-    equation is simply a component of the projection of predictor \(y\) onto feature
-    subspace \(X\) to get \(\hat{y}\).
+    This note illustrates a geometric interpretation of multivariate linear regression,
+    which I have found to be the most intuitive way to think of regression problems.
     
-    The regression problem is traditionally stated like this:
+    Given a feature matrix X, and output vector y, the objective of linear regression is
+    to calculate a set of coefficients B that when linearly combined with X produces a
+    new vector \(\hat{y}\).
     
     \( \hat{y} = X B \)
     
-    A prediction \(\hat{y}\) is equal to the multiplication of design matrix X (feature
-    vectors) multiplied by coefficients \(B\).
+    Think of X as a m x n matrix, and y as a n-dimensional column vector.
     
-    Our vector of observations is represented by \(y\), and is a noisy representation of
-    \(\hat{y}\) such that:
+    \( \hat{y} = X B =
+    \begin{bmatrix}
+    a_{1,1} & a_{1,2} & \cdots & a_{1,n} \\
+    a_{2,1} & a_{2,2} & \cdots & a_{2,n} \\
+    \vdots  & \vdots  & \ddots & \vdots  \\
+    a_{m,1} & a_{m,2} & \cdots & a_{m,n}
+    \end{bmatrix}\\
+    \cdot
+    \begin{bmatrix}
+    a_{1,1} \\
+    a_{2,1} \\
+    ..  \\
+    a_{m,1} \end{bmatrix}\)
     
-    \( y = \hat{y} + e \)
-    
-    \( where: \)
-    \( \hat{y} = X B \)
-    
-    Geometrically, this looks like this:
+    Geometrically, one can think of the output vector y as belonging to a m-dimensional
+    ambient space. Since m is greater then the rank of X, the feature matrix X contains n
+    column vectors belonging to some hyperplane in m-dimensional space. The picture below
+    illustrates a y vector in 3-dimensional (m-dimensional) ambient space, and 2 (n)
+    3-dimensional column vectors that do not span the 3 dimensional space, since they
+    contain a rank of 2.
     
     <img src="/static/images/geometry_regression_2.gif" alt="" width="300">
     
+    Therefore, yhat usually does not equal y, because feature matrix X does not contain
+    enough linearly independant vectors to solve the X B system. \(\hat{y}\) therefore
+    only represents the best prediction of y. It can be thought of as a noisy
+    representation of \(y\) that can be summed with an error term to equal y.
+    
+    \( y = \hat{y} + e \)
     \( y = X B + e \)
+    
+    In the context of regression, the normal equation \(B = (X^T X)^{-1} X^T y\) is used
+    to calculate a matrix \(B\) of coefficients that minimize the sum of square
+    differences between the feature matrix \(X\) and predictor vector \(y\). The linear
+    combination of \(B\) and (\X\) thus produces the predictor vector \(\hat{y}\).
     
     The geometric perspective thus shows that the residual \(e = y - XB\) is
     perpendicular to \(\hat{y}\). Thus:
@@ -90,7 +109,8 @@
     \( P = X (X.T X)-1 X.T \)
     \(    = X B \)
     
-    So what is \(B\)? Well, \(X B\) = projection of \(y\) onto \(\hat{y}\).
+    In the geometric context the normal equation is a component of the projection of
+    predictor \(y\) onto feature subspace \(X\) to get \(\hat{y}\).
     
 <body>
     <span class="_doc_sep">---</span>
