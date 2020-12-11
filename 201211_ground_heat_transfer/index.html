@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Notes | Saeran Vasanthakumar</title>
+    <link rel="stylesheet" type="text/css" href="/static/screen.css" media="screen" />
+    <meta name="author" content="Saeran Vasanthakumar">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            extensions: ["tex2jax.js"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+            tex2jax: {
+                inlineMath: [ ['$','$'], ['\(','\)'] ],
+                displayMath: [ ['$$','$$'], ['\[','\]']],
+                skipTags: ["script","noscript","style","textarea", "code", "img src"],
+                processClass: 'content',
+                processEscapes: true
+            },
+            "HTML-CSS": { availableFonts: ["TeX"] }
+        });
+    </script>
+</head>
+<body>
+<span class="content">
+    <span class="nbk_title"><a href="/">Notes</a></span>
+    <span class="nbk_comment"></span>
+    <span class="nbk_comment">by Saeran Vasanthakumar</span>
+    <span class="_doc_sep">---</span>
+    
+    <span class="nbk_directive"><i>20/12/11 - Ground Heat Transfer</i></span>
+    <!-- autoescape off to allow images. Debug why safe filter isn't working -->
+    
+    Someone was asking about modeling ground heat transfer on the Ladybug forums, which
+    brought up some of the peculiarities of moving heat and moisture through the earth
+    that defy the typical assumptions we make in building energy modeling. Here’s my
+    discussion of this:<blockquote>
+    To approximate the impact of ground coupling, you can’t just model the ground as a
+    thermal zone, adjacent to building zones due to the following two complications:<ul
+    ><li>The thermal zone surface conduction calculations model heat transfer in
+    1-dimension, which thus assumes the entire surface plane is isothermal (temperature
+    is constant). But ground heat transfer needs to be modeled in 2 or even 3 dimensions
+    (since it’s a large, wet, thermal mass that dynamically changes along the footprint
+    of the entire building at different depths).</li
+    ><li>Swings in ground temperatures operate on the timescale of months, and even
+    years, whereas EnergyPlus thermal zones (which represents the ground in that example)
+    operates on an hourly timescale.</li
+    ></ul>
+    The most accurate way to do this in EnergyPlus is with Kiva[1], which models dynamic,
+    multidimensional ground/foundation heat flow, and moisture transportation at
+    different timescales.</blockquote>
+    My full response can be read <a href="https://discourse.ladybug.tools/t/computing-
+    ground-temperature-under-an-insulated-
+    glasshouse/12105/3?u=saeranvasanthakumar">here</a>.
+    
+    Within the context of creating a supervised learning energy model, I think this is,
+    for now, a domain that doesn't need to be investigated since incorporating accurate
+    ground heat transfer disrupts a lot of the one-dimensional simplicity I want to take
+    advantage for in my ensemble learner. Ground heat transfer would only be a problem if
+    the learner needs to predict single-family residential models, since its fairly
+    marginal for large, multi-storey commercial buildings. In fact, the <a
+    href="https://github.com/ladybug-tools/uwg">UWG</a> doesn’t even model ground heat
+    transfer for its building energy models, although it does model the ground
+    temperature to model the amount of energy needed for service hot water. In general, I
+    would assume that the single-family residential exhibits a lot of variance in it’s
+    energy distribution that will be difficult for learners to generalize.
+    
+<body>
+    <span class="_doc_sep">---</span>
+    <span class="nbk_grey">email: saeranv @ gmail dot com</span>
+    <span class="nbk_grey">git: <a href="https://github.com/saeranv/" style="color:grey;">github.com/saeranv</a></span>
+</body>
+
+</span>
+</body>
+</html>
