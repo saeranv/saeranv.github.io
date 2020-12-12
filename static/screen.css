@@ -16,18 +16,22 @@ Notes:
 
     /* Non 'pre' stuff*/
     max-width:750px;
-    overflow-wrap: normal;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    white-space : pre-wrap !important;
+
     /* # Margin/Padding */
     margin: left;
+    margin-left: 20px;
     padding-top: 10px;
-    padding-left: 5px;
     /* # For visual debuggin */
     /* border: 3px solid #73AD21; */
 
     /* from aaron swarz */
     font-family: "Georgia";
-    font-size: 10pt;
+    font-size: 12pt;
     color: #000;
+
 }
 
 /*Title*/
@@ -61,10 +65,8 @@ Notes:
     color: brown;
 }
 
-a:link, a:visited, a:active {
-    color: black;
-    text-decoration-color: grey;
-}
+a:link, a:active { color: #68693F; text-decoration: none; border-bottom: 1px dotted #ccc;}
+a:visited { color: #68693F; text-decoration: none; }
 
 blockquote {
   background: #f9f9f9;
@@ -75,9 +77,4 @@ blockquote {
 
 blockquote p {
   display: inline;
-}
-
-li::before{ /* This is to align the first line. */
-    content:" ";
-    padding-left:10px;
 }

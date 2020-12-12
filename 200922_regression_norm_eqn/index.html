@@ -1,13 +1,13 @@
 <!doctype html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <title>Notes | Saeran Vasanthakumar</title>
     <link rel="stylesheet" type="text/css" href="/static/screen.css" media="screen" />
     <meta name="author" content="Saeran Vasanthakumar">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async
-            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
@@ -24,107 +24,88 @@
         });
     </script>
 </head>
+
 <body>
 <span class="content">
-    <span class="nbk_title"><a href="/">Notes</a></span>
-    <span class="nbk_comment"></span>
-    <span class="nbk_comment">by Saeran Vasanthakumar</span>
-    <span class="_doc_sep">---</span>
-    
-    <span class="nbk_directive"><i>20/09/22 - Linear Regression as Geometric Projection</i></span>
-    <!-- autoescape off to allow images. Debug why safe filter isn't working -->
-    
-    This note illustrates a geometric interpretation of multivariate linear regression,
-    which I have found to be the most intuitive way to think of regression problems.
-    
-    Given a feature matrix \(X\), and output vector \(y\), the objective of linear
-    regression is to calculate a set of coefficients B that when linearly combined with
-    \(X\) produces a new vector \(\hat{y}\).
-    
-    \( \hat{y} = X B \)
-    
-    Think of \(X\) as a m x n matrix, and \(y\) as a n-dimensional column vector.
-    
-    \( \hat{y} =
-    \begin{bmatrix}
-    a_{1,1} & a_{1,2} & \cdots & a_{1,n} \\
-    a_{2,1} & a_{2,2} & \cdots & a_{2,n} \\
-    \vdots  & \vdots  & \ddots & \vdots  \\
-    a_{m,1} & a_{m,2} & \cdots & a_{m,n}
-    \end{bmatrix}\\
-    \cdot
-    \begin{bmatrix}
-    a_{1,1} \\
-    a_{2,1} \\
-    ..  \\
-    a_{m,1} \end{bmatrix}\)
-    
-    Geometrically, one can think of the output vector \(y\) as belonging to a
-    m-dimensional ambient space. Since m is greater then the rank of \(X\), the feature
-    matrix \(X\) contains n column vectors belonging to some hyperplane in m-dimensional
-    space. The picture below illustrates a concrete example of this, with a m = 3 and n =
-    2. The \(y\) vector sits in 3-dimensional ambient space, and \(X\) consists of two
-    3-dimensional column vectors that sit in a 2-dimensional hyperplane.
-    
-    <img src="/static/images/geometry_regression_2.gif" alt="" width="300">
-    
-    Already our geometric interpretation gives us some useful intuition about regression.
-    We can clearly see that no matter how we try and scale and combine the column vectors
-    in the \(X\) matrix, their combination (\(\hat{y}\)) will not equal \(y\), because
-    feature matrix \(X\) does not contain enough linearly independant vectors.
-    \(\hat{y}\) therefore only represents the best prediction of \(y\). It can be thought
-    of as a noisy representation of \(y\) that can be summed with an error term to equal
-    \(y\).
-    
-    \(\begin{align}
-    y &= \hat{y} + \epsilon \\
-      &= X B + \epsilon \\
-    \end{align}\)
-    
-    Our geometric image shows us that \(\hat{y}\) is a projection of predictor \(y\) onto
-    feature subspace \(X\). In the context of regression, the normal equation
-    \(B = (X^T X)^{-1} X^T y\) is used to calculate a matrix \(B\) of coefficients that
-    minimize the sum of square differences between the feature matrix \(X\) and predictor
-    vector \(y\). Geometrically, this works out to the projection of \(y\) onto a
-    hyperplane to get \(\hat{y}\). We can solve for \(B\) by exploiting the orthongonal
-    relationships between \(\epsilon\) and \(\hat{y}\) on the \(X\) hyperplane.
-    
-    Specifically, since the residual \(\epsilon = y - XB\) is perpendicular to
-    \(\hat{y}\), the dot product between the two is zero.
-    
-    \( X^T (y - X B) = 0 \)
-    
-    And that's it. Now just solve for \(B\) algebraically.
-    
-    \(\begin{align}
-    X^T y - X^T X B &= 0 \\
-    X^T y &= X^T X B \\
-    (X^T X)-1 X^T y &= (X^T X)^{-1} (X^T X) B \\
-    (X^T X)^{-1} X^T y &= B \\
-    B &= (X^T X)^{-1} X^T y \\
-    \end{align}\)
-    
-    Multiply \(X\) by \(B\) to get \(\hat{y}\).
-    
-    Using this, we can also derive \(P\) a matrix that projects n-dimensional \(y\) onto
-    the \(X\) hyperplane.
-    
-    Since \(\hat{y} = X B\)
-    
-    \(\begin{align}
-    \hat{y} &= X (X^T X)^{-1} X^T y \\
-    &= P y \\
-    \end{align}\)
-    \(\begin{align}
-    P &= X (X^T X)^{-1} X^T \\
-    \end{align}\)
-    
+<span class="nbk_title"><a href="/">Notes</a></span>
+<span class="nbk_comment"></span>
+<span class="nbk_comment">by Saeran Vasanthakumar</span>
+<span class="_doc_sep">---</span>
+
+<span class="nbk_directive"><i>20/09/22 - Linear Regression as Geometric Projection</i></span>
+
+This note illustrates a geometric interpretation of multivariate linear regression, which I have found to be the most intuitive way to think of regression problems.
+
+Given a feature matrix \(X\), and output vector \(y\), the objective of linear regression is to calculate a set of coefficients B that when linearly combined with \(X\) produces a new vector \(\hat{y}\).
+
+\( \hat{y} = X B \)
+
+Think of \(X\) as a m x n matrix, and \(y\) as a n-dimensional column vector.
+
+\( \hat{y} =
+\begin{bmatrix}
+a_{1,1} & a_{1,2} & \cdots & a_{1,n} \\
+a_{2,1} & a_{2,2} & \cdots & a_{2,n} \\
+\vdots  & \vdots  & \ddots & \vdots  \\
+a_{m,1} & a_{m,2} & \cdots & a_{m,n}
+\end{bmatrix}\\
+\cdot
+\begin{bmatrix}
+a_{1,1} \\
+a_{2,1} \\
+..  \\
+a_{m,1} \end{bmatrix}\)
+
+Geometrically, one can think of the output vector \(y\) as belonging to a m-dimensional ambient space. Since m is greater then the rank of \(X\), the feature matrix \(X\) contains n column vectors belonging to some hyperplane in m-dimensional space. The picture below illustrates a concrete example of this, with a m = 3 and n = 2. The \(y\) vector sits in 3-dimensional ambient space, and \(X\) consists of two 3-dimensional column vectors that sit in a 2-dimensional hyperplane.
+
+<img src="/static/images/geometry_regression_2.gif" alt="" width="300">
+
+Already our geometric interpretation gives us some useful intuition about regression. We can clearly see that no matter how we try and scale and combine the column vectors in the \(X\) matrix, their combination (\(\hat{y}\)) will not equal \(y\), because feature matrix \(X\) does not contain enough linearly independant vectors. \(\hat{y}\) therefore only represents the best prediction of \(y\). It can be thought of as a noisy representation of \(y\) that can be summed with an error term to equal \(y\).
+
+\(\begin{align}
+y &= \hat{y} + \epsilon \\
+  &= X B + \epsilon \\
+\end{align}\)
+
+Our geometric image shows us that \(\hat{y}\) is a projection of predictor \(y\) onto feature subspace \(X\). In the context of regression, the normal equation
+\(B = (X^T X)^{-1} X^T y\) is used to calculate a matrix \(B\) of coefficients that minimize the sum of square differences between the feature matrix \(X\) and predictor vector \(y\). Geometrically, this works out to the projection of \(y\) onto a hyperplane to get \(\hat{y}\). We can solve for \(B\) by exploiting the orthongonal relationships between \(\epsilon\) and \(\hat{y}\) on the \(X\) hyperplane.
+
+Specifically, since the residual \(\epsilon = y - XB\) is perpendicular to \(\hat{y}\), the dot product between the two is zero.
+
+\( X^T (y - X B) = 0 \)
+
+And that's it. Now just solve for \(B\) algebraically.
+
+\(\begin{align}
+X^T y - X^T X B &= 0 \\
+X^T y &= X^T X B \\
+(X^T X)-1 X^T y &= (X^T X)^{-1} (X^T X) B \\
+(X^T X)^{-1} X^T y &= B \\
+B &= (X^T X)^{-1} X^T y \\
+\end{align}\)
+
+Multiply \(X\) by \(B\) to get \(\hat{y}\).
+
+Using this, we can also derive \(P\) a matrix that projects n-dimensional \(y\) onto the \(X\) hyperplane.
+
+Since \(\hat{y} = X B\)
+
+\(\begin{align}
+\hat{y} &= X (X^T X)^{-1} X^T y \\
+&= P y \\
+\end{align}\)
+\(\begin{align}
+P &= X (X^T X)^{-1} X^T \\
+\end{align}\)
+<!-- autoescape off to allow images. Debug why safe filter isn't working
+     ref for indent: https://jinja.palletsprojects.com/en/master/templates/#indent -->
 <body>
-    <span class="_doc_sep">---</span>
-    <span class="nbk_grey">email: saeranv @ gmail dot com</span>
-    <span class="nbk_grey">git: <a href="https://github.com/saeranv/" style="color:grey;">github.com/saeranv</a></span>
+<span class="_doc_sep">---</span>
+<span class="nbk_grey">email: saeranv @ gmail dot com</span>
+<span class="nbk_grey">git: <a href="https://github.com/saeranv/" style="color:grey;">github.com/saeranv</a></span>
 </body>
 
 </span>
 </body>
+
 </html>
