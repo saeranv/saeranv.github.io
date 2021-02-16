@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Notes | Saeran Vasanthakumar</title>
+    <link rel="stylesheet" type="text/css" href="/static/screen.css" media="screen" />
+    <meta name="author" content="Saeran Vasanthakumar">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            extensions: ["tex2jax.js"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+            tex2jax: {
+                inlineMath: [ ['$','$'], ['\(','\)'] ],
+                displayMath: [ ['$$','$$'], ['\[','\]']],
+                skipTags: ["script","noscript","style","textarea", "code", "img src"],
+                processClass: 'content',
+                processEscapes: true
+            },
+            "HTML-CSS": { availableFonts: ["TeX"] }
+        });
+    </script>
+</head>
+
+<body>
+<span class="content">
+<span class="nbk_title"><a href="/">Notes</a></span>
+<span class="nbk_comment"></span>
+<span class="nbk_comment">by Saeran Vasanthakumar</span>
+<span class="_doc_sep">---</span>
+
+<span class="nbk_directive"><i>21/02/15 - Modeling Steady-state Heat and Temperature with CTF Matrices</i></span>
+
+For steady state (no mass) simulation, you can model the state of temperature and heat flow through a material by:
+
+\(y_{int} = H \cdot X_{ext} \)
+
+\(\begin{bmatrix}
+T_{int} \\
+q_{int} \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 & R_1 d_1 \\
+0 & 1 \\
+\end{bmatrix}\\
+\begin{bmatrix}
+T_{ext} \\
+q_{ext} \\
+\end{bmatrix} \)
+
+
+Where:
+\( \begin{align}
+&R_i = \text{ Resistance at the } i_{th} \text{ layer in } \frac{m2K}{W} \\ 
+&d = \text{ depth in } m \\ 
+&T = \text{ Temperature in } K \\ 
+&q = \text{ Heat flux in } \frac{W}{m2} \\
+\end{align} \)
+
+Applying the matrix transformation results in the following formula: 
+
+\( \begin{align}
+&T_{ext} = T_{int} + q_{int} \cdot R_1 d_1 \text{, } K + (W/m2 * m2K/W) = K \\  
+&q_{ext} = q_{int}
+\end{align}
+\)
+
+So temperature is reduced proportional to material depth and resistance, while heat flow is constant. The initial, boundary temperature and heat flux is provided, and then subsequent state and flow values are calculated by taking the derivative of heat flux with respect to conductance to calculate change in temperature. This can then be amended to incorporate volumetric heat capacity, and density to model transient-state heat flow. 
+
+The matrix representation of this formula gives us an efficient way to compose multiple, parallel layers (i.e a series circuit) together to calculate simple multi-layer assemblies: 
+
+\( y_{ext} = H_3 \cdot H_2 \cdot H_1 \cdot X_{int} \)
+
+Also, the matrix representation means it can be represented as a neural network, and differentiated with backpropagation to identify weights to match labeled temperature and heat flux boundary conditions.
+<!-- autoescape off to allow images. Debug why safe filter isn't working
+     ref for indent: https://jinja.palletsprojects.com/en/master/templates/#indent -->
+<body>
+<span class="_doc_sep">---</span>
+<span class="nbk_grey">email: saeranv @ gmail dot com</span>
+<span class="nbk_grey">git: <a href="https://github.com/saeranv/" style="color:grey;">github.com/saeranv</a></span>
+</body>
+
+</span>
+</body>
+
+</html>
