@@ -54,26 +54,46 @@ q_{ext} \\
 
 
 Where:
-\( \begin{align}
-&R_i = \text{ Resistance at the } i_{th} \text{ layer in } \frac{m2K}{W} \\ 
+\( 
+\begin{align}
+&R_i = \text{ Resistivity at the } i_{th} \text{ layer in } \frac{mK}{W} \\ 
 &d = \text{ depth in } m \\ 
 &T = \text{ Temperature in } K \\ 
 &q = \text{ Heat flux in } \frac{W}{m2} \\
-\end{align} \)
+\end{align} 
+\)
 
 Applying the matrix transformation results in the following formula: 
 
-\( \begin{align}
-&T_{ext} = T_{int} + q_{int} \cdot R_1 d_1 \text{, } K + (W/m2 * m2K/W) = K \\  
-&q_{ext} = q_{int}
+\( 
+\begin{align}
+&T_{ext} = T_{int} + q_{int} \cdot R_1 d_1 \\  
+&q_{ext} = q_{int} \\
 \end{align}
 \)
 
-So temperature is reduced proportional to material depth and resistance, while heat flow is constant. The initial, boundary temperature and heat flux is provided, and then subsequent state and flow values are calculated by taking the derivative of heat flux with respect to conductance to calculate change in temperature. This can then be amended to incorporate volumetric heat capacity, and density to model transient-state heat flow. 
+\(
+\text{Note for (1): } K + (W/m2 * (mK/W) \cdot m) = K \\
+\)
+
+So temperature is reduced proportional to material depth and resistivity, while heat flow is constant. The initial, boundary temperature and heat flux is provided, and then subsequent state and flow values are calculated by taking the derivative of heat flux with respect to conductance to calculate change in temperature. This can then be amended to incorporate volumetric heat capacity, and density to model transient-state heat flow. 
+
+Note that \(q\) (a constant value in this steady-state problem) can be reformulated as the ratio of total temperature, depth and \(R\)-value:
+
+\(q_{ext} = q_{int} = q_{total} = \frac{R d}{\Delta T}\)  
+
+Which illustrates familiar relationship between the ratio of total temperature, \(R\) and a specific layer:
+
+\(
+\begin{align}
+\frac{\Delta T_{i}}{\Delta T_{total}} &= \frac{R_{i} d_{i}}{R_{total} d_{total}}
+\end{align}
+\) 
 
 The matrix representation of this formula gives us an efficient way to compose multiple, parallel layers (i.e a series circuit) together to calculate simple multi-layer assemblies: 
 
 \( y_{ext} = H_3 \cdot H_2 \cdot H_1 \cdot X_{int} \)
+
 
 <b>References</b>
 
