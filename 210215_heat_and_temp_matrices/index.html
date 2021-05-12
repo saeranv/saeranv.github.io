@@ -54,20 +54,20 @@ q_{ext} \\
 
 
 Where:
-\( 
+\(
 \begin{align}
-&R_i = \text{ Resistivity at the } i_{th} \text{ layer in } \frac{mK}{W} \\ 
-&d = \text{ depth in } m \\ 
-&T = \text{ Temperature in } K \\ 
+&R_i = \text{ Resistivity at the } i_{th} \text{ layer in } \frac{mK}{W} \\
+&d = \text{ depth in } m \\
+&T = \text{ Temperature in } K \\
 &q = \text{ Heat flux in } \frac{W}{m2} \\
-\end{align} 
+\end{align}
 \)
 
-Applying the matrix transformation results in the following formula: 
+Applying the matrix transformation results in the following formula:
 
-\( 
+\(
 \begin{align}
-&T_{ext} = T_{int} + q_{int} \cdot R_1 d_1 \\  
+&T_{ext} = T_{int} + q_{int} \cdot R_1 d_1 \\
 &q_{ext} = q_{int} \\
 \end{align}
 \)
@@ -76,11 +76,9 @@ Applying the matrix transformation results in the following formula:
 \text{Note for (1): } K + (W/m2 * (mK/W) \cdot m) = K \\
 \)
 
-So temperature is reduced proportional to material depth and resistivity, while heat flow is constant. The initial, boundary temperature and heat flux is provided, and then subsequent state and flow values are calculated by taking the derivative of heat flux with respect to conductance to calculate change in temperature. This can then be amended to incorporate volumetric heat capacity, and density to model transient-state heat flow. 
+The initial, boundary temperature and heat flux is provided, and then subsequent state values are updated according to specific layer resistivity and depth. Note that \(q\) (a constant value in this steady-state problem) can be reformulated as the ratio of total temperature, depth and \(R\)-value:
 
-Note that \(q\) (a constant value in this steady-state problem) can be reformulated as the ratio of total temperature, depth and \(R\)-value:
-
-\(q_{ext} = q_{int} = q_{total} = \frac{R d}{\Delta T}\)  
+\(q_{ext} = q_{int} = q_{total} = \frac{R d}{\Delta T}\)
 
 Which illustrates familiar relationship between the ratio of total temperature, \(R\) and a specific layer:
 
@@ -88,18 +86,18 @@ Which illustrates familiar relationship between the ratio of total temperature, 
 \begin{align}
 \frac{\Delta T_{i}}{\Delta T_{total}} &= \frac{R_{i} d_{i}}{R_{total} d_{total}}
 \end{align}
-\) 
+\)
 
-The matrix representation of this formula gives us an efficient way to compose multiple, parallel layers (i.e a series circuit) together to calculate simple multi-layer assemblies: 
+The matrix representation of this formula gives us an efficient way to compose multiple, parallel layers (i.e a series circuit) together to calculate simple multi-layer assemblies:
 
 \( y_{ext} = H_3 \cdot H_2 \cdot H_1 \cdot X_{int} \)
 
 
 <b>References</b>
 
-1. Bassols, Xavier Botey. "The use of heat transfer functions for heat flow computation through multilayer walls". Masters Thesis. 2013.  
+1. Bassols, Xavier Botey. "The use of heat transfer functions for heat flow computation through multilayer walls". Masters Thesis. 2013.
 
-2. Conduction Through The Walls. <a href="https://bigladdersoftware.com/epx/docs/9-0/engineering-reference/conduction-through-the-walls.html#conduction-through-the-walls">EnergyPlus Engineering Reference -- EnergyPlus 9.0</a> 
+2. Conduction Through The Walls. <a href="https://bigladdersoftware.com/epx/docs/9-0/engineering-reference/conduction-through-the-walls.html#conduction-through-the-walls">EnergyPlus Engineering Reference -- EnergyPlus 9.0</a>
 <!-- autoescape off to allow images. Debug why safe filter isn't working
      ref for indent: https://jinja.palletsprojects.com/en/master/templates/#indent -->
 <body>
