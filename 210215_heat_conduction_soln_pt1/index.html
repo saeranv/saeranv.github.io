@@ -32,9 +32,9 @@
 <span class="nbk_comment">by Saeran Vasanthakumar</span>
 <span class="_doc_sep">---</span>
 
-<span class="nbk_directive"><i>21/02/15 - Modeling Steady-state Heat and Temperature Matrices</i></span>
+<span class="nbk_directive"><i>21/02/15 - Solving Heat Conduction Part I</i></span>
 
-For steady state (no mass) simulation, you can model the state of temperature and heat flow through a material by:
+For 1D steady state heat conduction, a simple way to solve for intermediate temperatures given a material's boundary conditions is:
 
 \(y_{int} = H \cdot X_{ext} \)
 
@@ -87,11 +87,6 @@ Which illustrates familiar relationship between the ratio of total temperature, 
 \frac{\Delta T_{i}}{\Delta T_{total}} &= \frac{R_{i} d_{i}}{R_{total} d_{total}}
 \end{align}
 \)
-
-The matrix representation of this formula gives us an efficient way to compose multiple, parallel layers (i.e a series circuit) together to calculate simple multi-layer assemblies:
-
-\( y_{ext} = H_3 \cdot H_2 \cdot H_1 \cdot X_{int} \)
-
 
 <b>References</b>
 

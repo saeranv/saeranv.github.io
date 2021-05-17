@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Notes | Saeran Vasanthakumar</title>
+    <link rel="stylesheet" type="text/css" href="/static/screen.css" media="screen" />
+    <meta name="author" content="Saeran Vasanthakumar">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            extensions: ["tex2jax.js"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+            tex2jax: {
+                inlineMath: [ ['$','$'], ['\(','\)'] ],
+                displayMath: [ ['$$','$$'], ['\[','\]']],
+                skipTags: ["script","noscript","style","textarea", "code", "img src"],
+                processClass: 'content',
+                processEscapes: true
+            },
+            "HTML-CSS": { availableFonts: ["TeX"] }
+        });
+    </script>
+</head>
+
+<body>
+<span class="content">
+<span class="nbk_title"><a href="/">Notes</a></span>
+<span class="nbk_comment"></span>
+<span class="nbk_comment">by Saeran Vasanthakumar</span>
+<span class="_doc_sep">---</span>
+
+<span class="nbk_directive"><i>21/05/17 - Solving Heat Conduction Part II</i></span>
+
+Continuing from my previous post, I worked out 6 additional heat conduction solvers. The methods were primarily referenced from Cengel's[1] <i>Heat and Mass Transfer</i> chapters on numerical methods. I started with transient heat conduction, in 1D, 2D, initally implemented with for loops and then rewritten as efficient matrix operations. Illustrated below are just the matrix version, illustrated for four time steps:
+
+<img src="/static/images/210517_heat_conduction/1d_transient.png" alt="" width="400">
+
+<img src="/static/images/210517_heat_conduction/2d_transient.png" alt="" width="400">
+
+From there I went to the much more difficult challenge of modeling steady state. Again, I did it in 1D and 2D. However, part of the reason this was such a tricker problem is because steady state heat conduction needs to be solved as a linear system of equations. So there's no for loop solution. The trick is to construct an N x N matrix for N nodes that can model the heat flow into each node from it's four neighbors. So a 2 x 4 lattice of nodes:
+<code>
+    N1 N2 N3 N4
+    N5 N6 N7 N8
+</code>
+thus needs to be modeled with the following matrix:
+<code>
+        N1  N2  N3  N4  N5  N6  N7  N8
+    N1  -4   1   0   0   1   0   0   0  = -Tup - Tleft
+    N2   1  -4   1   0   0   1   0   0  = -Tup
+    N3   0   1  -4   1   0   0   1   0  = -Tup
+    N4   0   0   1  -4   0   0   0   1  = -Tup - Tright
+    -----------------------------------
+    N5   1   0   0   0  -4   1   0   0  = -Tdown - Tleft
+    N6   0   1   0   0   1  -4   1   0  = -Tdown
+    N7   0   0   1   0   0   1  -4   1  = -Tdown
+    N8   0   0   0   1   0   0   1  -4  = -Tdown - Tright
+</code>
+
+Each row models the energy balance for each node, which, as this is a steady state system, equals zero for each node. For boundary nodes (which are all the nodes in the example above), known boundary conditions are moved to the right hand side. Note that between N4 and N5 the boundary conditions are modified to reflect there is no spatial adjacency between them. Setting this as a coefficient matrix \(A\), and boundary conditions and other known states captured in a N x 1 vector \(y\), solving for \(x\) provides the N temperatures.
+\(
+\begin{align}
+&A x = y \\
+&A^{-1} A x = A^{-1} y \\
+&x = A^{-1} y \\
+\end{align}
+\)
+
+This, is a much more elegant way of solving for interior temperatures then the one I wrote about in the previous post, since we can capture all the temperatures with one, parallellized computation. The result looks the same as the transient system, but in this case, has no temporal dimensions:
+
+<img src="/static/images/210517_heat_conduction/1d_steady.png" alt="" width="400">
+
+<img src="/static/images/210517_heat_conduction/2d_steady.png" alt="" width="400">
+
+
+<b>References</b>
+
+1. Cengel, Yunus A., and Afhsin J. Ghajar. Heat and Mass Transfer: Fundamentals & Applications. New York, 2011. Chapter 5.
+<!-- autoescape off to allow images. Debug why safe filter isn't working
+     ref for indent: https://jinja.palletsprojects.com/en/master/templates/#indent -->
+<body>
+<span class="_doc_sep">---</span>
+<span class="nbk_grey">email: saeranv @ gmail dot com</span>
+<span class="nbk_grey">git: <a href="https://github.com/saeranv/" style="color:grey;">github.com/saeranv</a></span>
+</body>
+
+</span>
+</body>
+
+</html>
