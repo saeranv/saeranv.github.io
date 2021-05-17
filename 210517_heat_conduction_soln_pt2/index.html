@@ -36,9 +36,9 @@
 
 Continuing from my previous post, I worked out 6 additional heat conduction solvers. The methods were primarily referenced from Cengel's[1] <i>Heat and Mass Transfer</i> chapters on numerical methods. I started with transient heat conduction, in 1D, 2D, initally implemented with for loops and then rewritten as efficient matrix operations. Illustrated below are just the matrix version, illustrated for four time steps:
 
-<img src="/static/images/210517_heat_conduction/1d_transient.png" alt="" width="400">
+<img src="/static/images/210517_heat_conduction/1d_transient.PNG" alt="" width="400">
 
-<img src="/static/images/210517_heat_conduction/2d_transient.png" alt="" width="400">
+<img src="/static/images/210517_heat_conduction/2d_transient.PNG" alt="" width="400">
 
 From there I went to the much more difficult challenge of modeling steady state. Again, I did it in 1D and 2D. However, part of the reason this was such a tricker problem is because steady state heat conduction needs to be solved as a linear system of equations. So there's no for loop solution. The trick is to construct an N x N matrix for N nodes that can model the heat flow into each node from it's four neighbors. So a 2 x 4 lattice of nodes:
 <code>
@@ -70,9 +70,9 @@ Each row models the energy balance for each node, which, as this is a steady sta
 
 This, is a much more elegant way of solving for interior temperatures then the one I wrote about in the previous post, since we can capture all the temperatures with one, parallellized computation. The result looks the same as the transient system, but in this case, has no temporal dimensions:
 
-<img src="/static/images/210517_heat_conduction/1d_steady.png" alt="" width="400">
+<img src="/static/images/210517_heat_conduction/1d_steady.PNG" alt="" width="400">
 
-<img src="/static/images/210517_heat_conduction/2d_steady.png" alt="" width="400">
+<img src="/static/images/210517_heat_conduction/2d_steady.PNG" alt="" width="400">
 
 
 <b>References</b>
