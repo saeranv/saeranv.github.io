@@ -15,7 +15,7 @@ Notes:
     display: block;
 
     /* Non 'pre' stuff*/
-    max-width:750px;
+    max-width:500px;
     overflow-wrap: break-word;
     word-break: break-word;
     white-space : pre-wrap !important;
