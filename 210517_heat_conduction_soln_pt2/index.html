@@ -42,22 +42,24 @@ Continuing from my previous post, I worked out 6 additional heat conduction solv
 
 From there I went to the much more difficult challenge of modeling steady state. Again, I did it in 1D and 2D. However, part of the reason this was such a tricker problem is because steady state heat conduction needs to be solved as a linear system of equations. So there's no for loop solution. The trick is to construct an N x N matrix for N nodes that can model the heat flow into each node from it's four neighbors. So a 2 x 4 lattice of nodes:
 <code>
-    N1 N2 N3
-    N4 N5 N6
+    N1 N2 N3 N4
+    N5 N6 N7 N8
 </code>
-can be modeled with the following matrix:
+thus needs to be modeled with the following matrix:
 <code>
-        N1  N2  N3  N4  N5  N6
-    N1  -4   1   0   1   0   0  = -Tn - Tw
-    N2   1  -4   1   0   1   0  = -Tn
-    N3   0   1  -4   0   0   1  = -Tn - Te
+        N1  N2  N3  N4  N5  N6  N7  N8
+    N1  -4   1   0   0   1   0   0   0  = -Tup - Tleft
+    N2   1  -4   1   0   0   1   0   0  = -Tup
+    N3   0   1  -4   1   0   0   1   0  = -Tup
+    N4   0   0   1  -4   0   0   0   1  = -Tup - Tright
     -----------------------------------
-    N4   1   0   0  -4   1   0  = -Ts - Tw
-    N5   0   1   0   1  -4   1  = -Ts
-    N6   0   0   1   0   1  -4  = -Ts - Te
+    N5   1   0   0   0  -4   1   0   0  = -Tdown - Tleft
+    N6   0   1   0   0   1  -4   1   0  = -Tdown
+    N7   0   0   1   0   0   1  -4   1  = -Tdown
+    N8   0   0   0   1   0   0   1  -4  = -Tdown - Tright
 </code>
 
-Each row models the energy balance for each node, which, as this is a steady state system, equals zero for each node. For boundary nodes (which are all the nodes in the example above), known boundary conditions are moved to the right hand side as Tn, Te, Ts, and Tw representing the north, east, west and south bounding nodes. Note that between N3 and N6 the boundary conditions are modified to reflect there is no spatial adjacency between them. Setting this as a coefficient matrix \(A\), and boundary conditions and other known states captured in a N x 1 vector \(y\), solving for \(x\) provides the N temperatures.
+Each row models the energy balance for each node, which, as this is a steady state system, equals zero for each node. For boundary nodes (which are all the nodes in the example above), known boundary conditions are moved to the right hand side. Note that between N4 and N5 the boundary conditions are modified to reflect there is no spatial adjacency between them. Setting this as a coefficient matrix \(A\), and boundary conditions and other known states captured in a N x 1 vector \(y\), solving for \(x\) provides the N temperatures.
 \(
 \begin{align}
 &A x = y \\
