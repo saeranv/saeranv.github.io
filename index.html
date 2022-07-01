@@ -7,12 +7,16 @@
     <link rel="stylesheet" type="text/css" href="/static/screen.css" media="screen" />
     <meta name="author" content="Saeran Vasanthakumar">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
     </script>
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
             extensions: ["tex2jax.js"],
             jax: ["input/TeX", "output/HTML-CSS"],
+            chtml: {
+                displayAlign: 'left', // default for indentalign when set to 'auto'
+                displayIndent: '0' // default for indentshift when set to 'auto'
+            },
             tex2jax: {
                 inlineMath: [ ['$','$'], ['\(','\)'] ],
                 displayMath: [ ['$$','$$'], ['\[','\]']],
@@ -20,7 +24,9 @@
                 processClass: 'content',
                 processEscapes: true
             },
-            "HTML-CSS": { availableFonts: ["TeX"] }
+            "HTML-CSS": {
+                availableFonts: ["TeX"]
+            }
         });
     </script>
 </head>
@@ -32,6 +38,8 @@
 <span class="nbk_comment">by Saeran Vasanthakumar</span>
 <span class="_doc_sep">---</span>
 
+    
+    <span class="nbk_comment">22/06/30 - <a href='220630_newton_law_cooling/index.html'>Newton&#39;s Law of Cooling from the Heat Equation</a></span>
     
     <span class="nbk_comment">21/07/07 - <a href='210707_Appa/index.html'>அப்பா</a></span>
     

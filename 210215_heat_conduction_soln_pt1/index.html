@@ -7,12 +7,16 @@
     <link rel="stylesheet" type="text/css" href="/static/screen.css" media="screen" />
     <meta name="author" content="Saeran Vasanthakumar">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
     </script>
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
             extensions: ["tex2jax.js"],
             jax: ["input/TeX", "output/HTML-CSS"],
+            chtml: {
+                displayAlign: 'left', // default for indentalign when set to 'auto'
+                displayIndent: '0' // default for indentshift when set to 'auto'
+            },
             tex2jax: {
                 inlineMath: [ ['$','$'], ['\(','\)'] ],
                 displayMath: [ ['$$','$$'], ['\[','\]']],
@@ -20,7 +24,9 @@
                 processClass: 'content',
                 processEscapes: true
             },
-            "HTML-CSS": { availableFonts: ["TeX"] }
+            "HTML-CSS": {
+                availableFonts: ["TeX"]
+            }
         });
     </script>
 </head>
@@ -33,8 +39,6 @@
 <span class="_doc_sep">---</span>
 
 <span class="nbk_directive"><i>21/02/15 - Solving Heat Conduction Part I</i></span>
-
-For 1D steady state heat conduction, a simple way to solve for intermediate temperatures given a material's boundary conditions is:
 
 \(y_{int} = H \cdot X_{ext} \)
 

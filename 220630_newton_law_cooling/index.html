@@ -1,0 +1,147 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Notes | Saeran Vasanthakumar</title>
+    <link rel="stylesheet" type="text/css" href="/static/screen.css" media="screen" />
+    <meta name="author" content="Saeran Vasanthakumar">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            extensions: ["tex2jax.js"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+            chtml: {
+                displayAlign: 'left', // default for indentalign when set to 'auto'
+                displayIndent: '0' // default for indentshift when set to 'auto'
+            },
+            tex2jax: {
+                inlineMath: [ ['$','$'], ['\(','\)'] ],
+                displayMath: [ ['$$','$$'], ['\[','\]']],
+                skipTags: ["script","noscript","style","textarea", "code", "img src"],
+                processClass: 'content',
+                processEscapes: true
+            },
+            "HTML-CSS": {
+                availableFonts: ["TeX"]
+            }
+        });
+    </script>
+</head>
+
+<body>
+<span class="content">
+<span class="nbk_title"><a href="/">Notes</a></span>
+<span class="nbk_comment"></span>
+<span class="nbk_comment">by Saeran Vasanthakumar</span>
+<span class="_doc_sep">---</span>
+
+<span class="nbk_directive"><i>22/06/30 - Newton&#39;s Law of Cooling from the Heat Equation</i></span>
+
+<div class="skinny_math">
+<b>Spatial energy transfer</b>
+$$
+\begin{flalign}
+Q_x &= k A \frac{dT}{dx}
+  &\text{  [W]} &\\
+\end{flalign}
+$$
+<b>Temporal energy transfer</b>
+$$
+\begin{flalign}
+Q_t &= \frac{dU}{dt}
+  &\text{  [J/s]} &\\
+&= C \rho V \frac{dT}{dt}
+  &\text{  [W]} &\\
+\\
+\end{flalign}
+$$The energy balance states the total change in heat over distance dU/dx at both boundaries of a 1D element equals the change in heat over time dU/dt.
+
+Derive thermal energy rates \(\frac{dU}{dt}\), \(\frac{dU}{dx}\) from the first law of thermodynamics.
+
+
+<b>Energy Balance</b>
+$$
+\begin{flalign}
+&dU = dQ \cdot dt &\text{ [J]} &\\
+\\
+&\text{ where: } dQ = \frac{d}{dx} \frac{dU}{dx} &\\
+\\
+&\frac{dU}{dt} = \frac{d}{dx} \frac{dU}{dx} &\text{ [W]} &\\
+\\
+&\text{where: }
+  \frac{dU}{dt} = C \rho V \frac{dT}{dt} \text{ and }
+  \frac{d}{dx} \frac{dU}{dx} = d\left( k A \frac{dT}{dx} \right) &\\
+\end{flalign}
+$$
+Assume the element's spatial temperature distribution is uniform, meaning the core of the element will always be the same temperature as it's surface, the mass \(\rho V \text{ [kg]}\) can be removed from eqn (2).
+
+
+<b>Lumped Assumptions</b>
+$$
+\begin{flalign}
+&C \rho V \frac{dT}{dt} = d\left( k A \frac{dT}{dx} \right)
+  &\text{ [W]} &\\
+\\
+&C \rho V \frac{dT}{dt} = k A \frac{dT}{dx}
+  &\text{ No net change in } dx &\\
+\\
+&C \frac{dT}{dt} = k \frac{dT}{dx}
+  &\text{ Remove mass } \rho V \text{ and } A &\\
+\end{flalign}
+$$
+
+<b>Set T(t) as y(t), solve calculus</b>
+$$
+\begin{flalign}
+\frac{dT}{dt} &= \frac{k}{C} \frac{dT}{dx}
+  &\text{ Rearranged } &\\
+\\
+\frac{dy}{dt} &= ky
+  &\text{ More intuitive y form} &\\
+\\
+&= k e^{kt}
+  \text{ iff } y(t) = e^{kt} &\\
+\end{flalign}
+$$
+
+<b>Set y(t) back to T(t) for final form</b>
+$$
+\begin{flalign}
+\frac{dT}{dt} &= kdT &\\
+&= k e^{kt} & &\\
+\\
+dT(t) &= e^{kt}
+  &\text{delta T function} &\\
+\end{flalign}
+$$
+
+<b>Account for dT at t=0</b>
+$$
+\begin{flalign}
+&\text{Solve }\frac{dT}{dt}
+  \text{ with chain rule } \mapsto
+    \frac{d}{dx}f(g(x)) = \frac{df}{dg} \cdot \frac{dg}{dx} = \frac{df}{dx} &\\
+\\
+&\frac{dT}{dt} = \frac{dC}{de^{kt}} \cdot \frac{de^{kt}}{dt} = C k e^{kt} &\\
+\\
+&T(t) = C e^{kt} &\\
+\\
+&\text{where } C = T(0) \text{ and } k = k A/C &\\
+\end{flalign}
+$$
+</div>
+<!-- autoescape off to allow images. Debug why safe filter isn't working
+     ref for indent: https://jinja.palletsprojects.com/en/master/templates/#indent -->
+<body>
+<span class="_doc_sep">---</span>
+<span class="nbk_grey">email: saeranv @ gmail dot com</span>
+<span class="nbk_grey">git: <a href="https://github.com/saeranv/" style="color:grey;">github.com/saeranv</a></span>
+</body>
+
+</span>
+</body>
+
+</html>

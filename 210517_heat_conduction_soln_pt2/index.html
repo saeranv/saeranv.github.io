@@ -7,12 +7,16 @@
     <link rel="stylesheet" type="text/css" href="/static/screen.css" media="screen" />
     <meta name="author" content="Saeran Vasanthakumar">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
     </script>
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
             extensions: ["tex2jax.js"],
             jax: ["input/TeX", "output/HTML-CSS"],
+            chtml: {
+                displayAlign: 'left', // default for indentalign when set to 'auto'
+                displayIndent: '0' // default for indentshift when set to 'auto'
+            },
             tex2jax: {
                 inlineMath: [ ['$','$'], ['\(','\)'] ],
                 displayMath: [ ['$$','$$'], ['\[','\]']],
@@ -20,7 +24,9 @@
                 processClass: 'content',
                 processEscapes: true
             },
-            "HTML-CSS": { availableFonts: ["TeX"] }
+            "HTML-CSS": {
+                availableFonts: ["TeX"]
+            }
         });
     </script>
 </head>
@@ -33,8 +39,6 @@
 <span class="_doc_sep">---</span>
 
 <span class="nbk_directive"><i>21/05/17 - Solving Heat Conduction Part II</i></span>
-
-Continuing from my previous post, I worked out 6 additional heat conduction solvers. The methods were primarily referenced from Cengel's[1] <i>Heat and Mass Transfer</i> chapters on numerical methods[1]. I started with transient heat conduction, in 1D, 2D, initally implemented with for loops and then rewritten as efficient matrix operations. Illustrated below are just the matrix version, illustrated for four time steps:
 
 <img src="/static/images/210517_heat_conduction/1d_transient.PNG" alt="" width="400">
 

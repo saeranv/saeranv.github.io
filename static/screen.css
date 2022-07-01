@@ -3,6 +3,9 @@ Notes:
 - ref is yaml.org
 - ctrl F5 to refresh css
 */
+.skinny_math {
+    max-width:450px;
+}
 
 .content {
 
@@ -31,7 +34,6 @@ Notes:
     font-family: "Georgia";
     font-size: 12pt;
     color: #000;
-
 }
 
 /*Title*/
