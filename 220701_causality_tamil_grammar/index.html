@@ -38,7 +38,7 @@
 <span class="nbk_comment">by Saeran Vasanthakumar</span>
 <span class="_doc_sep">---</span>
 
-<span class="nbk_directive"><i>22/07/01 - Causality Structure in Tamil Grammar</i></span>
+<span class="nbk_directive"><i>22/07/01 - Cause and Effect Chaining in Tamil Grammar</i></span>
 
 Something that has bothered me for a while, is the way complex Tamil sentences structure causality in a very idiosyncratic way, to me. By causality here, I mean reasoning about the relationships between a cause and it’s subsequent effect. The subsequent effect can be another cause, which then propogates a new effect, and so causal reasoning about complex topics can occur when chaining togheter multiple preceding causes and effects as a sort of heavily composed function (effect_n(…(effect_2(effect_1(cause_1)))…).
 
@@ -46,7 +46,8 @@ My idle suspicion is that the grammatical structure of Tamil doesn’t map to th
 
 Note that, I don’t think this has any impact of actual causal reasoning. The recursive nature of languages seem to have evolved to be very flexible, and minor changes to the Tamil syntax can accomodate the linear cause-effect chains easily. I think this is something that occurs at the level of grammar and fluency only.
 
-The specific grammar differences I am refering to is the way Tamil inverts the subject, verb, object order of a clause. In the example below I’ll parse a single clause “the heat caused a crisis” with a clear cause-effect structure. In the multi-clause block I add a subordinate clause that uses the effect of the previous sentencs as a new cause - “the heat caused a crisis, eventually creating more crises.”
+The specific grammar differences I am refering to is the way Tamil inverts the subject, verb, object order of a clause. Here’s I’ll parse a single clause “the heat caused a crisis” with a clear cause-effect structure.
+
 
 $$
 \begin{alignat}{7}
@@ -61,7 +62,13 @@ $$
 &( \text{ subject } && &\cdot &\text{ object } && &\cdot &\text{ verb }) \\
 \\
 &( \text{ வெப்பம் } && &\cdot &\text{ நெருக்கடியை } && &\cdot &\text{ ஏற்படுத்தியது }) \\
-\\
+&\color{white}((\text{ வெப்பம் } && &\color{white}\cdot &\color{white}\text{ நெருக்கடியை } && &\color{white}\cdot &\color{white}\text{ ஏற்படுத்தியது })
+     && &\color{white}\cdot &\color{white}\text{ நெருக்கடிகளை } && &\color{white}\cdot &\color{white}\text{ உருவாக்குகிறது }) \\
+\end{alignat}$$
+Does the subject-verb-object inversion leads to inverting the causality of the sentence as multiple clauses are involved? Here's a simple, maybe trivial example. I want to add a subordinate clause that uses the effect of the previous sentencs as a new cause - “the heat caused a crisis, eventually creating more crisises.”
+
+$$
+\begin{alignat}{6}
 &\textbf{English Multi-clause} \\
 \\
 &(( \text{ subject } && &\cdot &\text{ verb } && &\cdot &\text{ object } )
@@ -85,6 +92,7 @@ $$
      && &\cdot &X_3                       && &\cdot &\mapsto) \\
 \end{alignat}
 $$
+
 Here we can see how cause and effect is chained in both languages, with the object from the first clause, acting as subject in the second clause, and thus switching from acting as the effect to the cause, respectively.
 In English, every cause is a bridge between related effects. In Tamil, the cause seemingly bridges between the "wrong" effects.
 <!-- autoescape off to allow images. Debug why safe filter isn't working
