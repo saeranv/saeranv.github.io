@@ -46,61 +46,47 @@ My idle suspicion is that the grammatical structure of Tamil doesn’t map to th
 
 Note that, I don’t think this has any impact of actual causal reasoning. The recursive nature of languages seem to have evolved to be very flexible, and minor changes to the Tamil syntax can accomodate the linear cause-effect chains easily. I think this is something that occurs at the level of grammar and fluency only.
 
-The specific grammar differences I am refering to is the way Tamil inverts the subject, verb, object order of a clause. Here’s I’ll parse a single clause “the heat caused a crisis” with a clear cause-effect structure.
+The specific grammar differences I am refering to is the way Tamil inverts the subject, verb, object order of a clause. In the example below I’ll parse a single clause “the heat caused a crisis” with a clear cause-effect structure. In the multi-clause block I add a subordinate clause that uses the effect of the previous sentencs as a new cause - “the heat caused a crisis, eventually creating more crises.”
 
-
-<b>English - Single Clause</b>
 $$
-\begin{flalign}
-[ &\text{ subject } &\cdot &\text{ verb } &\cdot &\text{ object }] &\\
+\begin{alignat}{7}
+&\textbf{English Single Clause} \\
 \\
-[ &\text{ The heat } &\cdot &\text{ caused } &\cdot &\text{ a crisis }]  &\\
-\end{flalign}
-$$
-
-<b>Tamil - Single Clause</b>
-$$
-\begin{flalign}
-[ &\text{ subject } &\cdot &\text{ object } &\cdot &\text{ verb }] &\\
+&( \text{ subject } && &\cdot &\text{ verb } && &\cdot &\text{ object } ) \\
 \\
-[ &\text{ வெப்பம் } &\cdot &\text{ நெருக்கடியை } &\cdot &\text{ ஏற்படுத்தியது }] &\\
-\end{flalign}
-$$
-
-Does the subject-verb-object inversion leads to inverting the causality of the sentence as multiple clauses are involved?
-
-Here's a simple, maybe trivial example. I want to add a subordinate clause that uses the effect of the previous sentencs as a new cause - “the heat caused a crisis, eventually creating more crisises.”
-
-
-<b>English - Multi-clause</b>
-$$
-\begin{flalign}
-[ &\text{ subject } &\cdot &\text{ verb } &\cdot &\text{ object }]
-     [ &\text{ verb } &\cdot &\text{ object }] &\\
+&( \text{ The heat } && &\cdot &\text{ caused } && &\cdot &\text{ a crisis })  \\
 \\
-[ &\text{ The heat } &\cdot &\text{ caused } &\cdot &\text{ a crisis }]
-     [ &\text{ creating } &\cdot &\text{ more crises }] &\\
+&\textbf{Tamil Single Clause} \\
 \\
-  &X_1                 &\cdot &\mapsto         &\cdot &X_2
-       &\mapsto           &\cdot &X_3                     &\\
-\end{flalign}
-$$
-
-<b>Tamil - Multi-clause</b>
-$$
-\begin{flalign}
-[ &\text{ subject } &\cdot &\text{ object } &\cdot &\text{ verb }]
-[ &\text{ object } &\cdot &\text{ verb }] &\\
+&( \text{ subject } && &\cdot &\text{ object } && &\cdot &\text{ verb }) \\
 \\
-[ &\text{ வெப்பம் } &\cdot &\text{ நெருக்கடியை } &\cdot &\text{ ஏற்படுத்தியது }]
-    [ &\text{ நெருக்கடிகளை } &\cdot &\text{ உருவாக்குகிறது }] &\\
+&( \text{ வெப்பம் } && &\cdot &\text{ நெருக்கடியை } && &\cdot &\text{ ஏற்படுத்தியது }) \\
 \\
-  &X_1               &\cdot &X_2                     &\cdot &\mapsto
-      &X_3                               &\cdot &\mapsto &\\
-\end{flalign}
+&\textbf{English Multi-clause} \\
+\\
+&(( \text{ subject } && &\cdot &\text{ verb } && &\cdot &\text{ object } )
+     && &\cdot &\text{ verb } && &\cdot &\text{ object }) \\
+\\
+&(( \text{ The heat } && &\cdot &\text{ caused } && &\cdot &\text{ a crisis })
+     && &\cdot &\text{ creating } && &\cdot &\text{ more crises }) \\
+\\
+&(( X_1                && &\cdot &\mapsto        && &\cdot &X_2)
+     && &\cdot  &\mapsto           && &\cdot &X_3) \\
+\\
+&\textbf{Tamil Multi-clause} \\
+\\
+&((\text{ subject } && &\cdot &\text{ object } && &\cdot &\text{ verb })
+     && &\cdot &\text{ object } && &\cdot &\text{ verb }) \\
+\\
+&((\text{ வெப்பம் } && &\cdot &\text{ நெருக்கடியை } && &\cdot &\text{ ஏற்படுத்தியது })
+     && &\cdot &\text{ நெருக்கடிகளை } && &\cdot &\text{ உருவாக்குகிறது }) \\
+\\
+&((X_1               && &\cdot &X_2                      && &\cdot &\mapsto )
+     && &\cdot &X_3                       && &\cdot &\mapsto) \\
+\end{alignat}
 $$
-
-
+Here we can see how cause and effect is chained in both languages, with the object from the first clause, acting as subject in the second clause, and thus switching from acting as the effect to the cause, respectively.
+In English, every cause is a bridge between related effects. In Tamil, the cause seemingly bridges between the "wrong" effects.
 <!-- autoescape off to allow images. Debug why safe filter isn't working
      ref for indent: https://jinja.palletsprojects.com/en/master/templates/#indent -->
 <body>
