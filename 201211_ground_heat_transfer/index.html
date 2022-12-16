@@ -40,16 +40,13 @@
 
 <span class="nbk_directive"><i>20/12/11 - Ground Heat Transfer</i></span>
 
-Someone was asking about modeling ground heat transfer on the Ladybug forums, which brought up some of the peculiarities of moving heat and moisture through the earth that defy the typical assumptions we make in building energy modeling. Here’s my discussion of this:<blockquote>
-To approximate the impact of ground coupling, you can’t just model the ground as a thermal zone, adjacent to building zones due to the following two complications:<ul
+<div class="skinny_math">
+Modeling the flow of heat and moisture through the earth defies some of the typical simplifying assumptions made in EnergyPlus's (EP) surface heat balance. Specifically, to approximate the impact of ground coupling, you can’t just model the ground as a thermal zone, adjacent to building zones due to the following two complications:<ul
 ><li>The thermal zone surface conduction calculations model heat transfer in 1-dimension, which thus assumes the entire surface plane is isothermal (temperature is constant). But ground heat transfer needs to be modeled in 2 or even 3 dimensions (since it’s a large, wet, thermal mass that dynamically changes along the footprint of the entire building at different depths).</li
-><li>Swings in ground temperatures operate on the timescale of months, and even years, whereas EnergyPlus thermal zones (which represents the ground in that example) operates on an hourly timescale.</li
+><br><li>Swings in ground temperatures operate on the timescale of months, and even years, whereas EnergyPlus thermal zones (which represents the ground in that example) operates on an hourly timescale.</li
 ></ul>
-The most accurate way to do this in EnergyPlus is with Kiva[1], which models dynamic, multidimensional ground/foundation heat flow, and moisture transportation at different timescales.</blockquote>
-My full response can be read <a href="https://discourse.ladybug.tools/t/computing-ground-temperature-under-an-insulated-glasshouse/12105/3?u=saeranvasanthakumar">here</a>.
-
-Within the context of creating a supervised learning energy model, I think this is, for now, a domain that doesn't need to be investigated since incorporating accurate ground heat transfer disrupts a lot of the one-dimensional simplicity I want to take advantage for in my ensemble learner. Ground heat transfer would only be a problem if the learner needs to predict single-family residential models, since its fairly marginal for large, multi-storey commercial buildings. In fact, the <a href="https://github.com/ladybug-tools/uwg">UWG</a> doesn’t even model ground heat transfer for its building energy models, although it does model the ground temperature to model the amount of energy needed for service hot water. In general, I would assume that the single-family residential exhibits a lot of variance in it’s energy distribution that will be difficult for learners to generalize.
-
+The most accurate way to do this in EnergyPlus is with Kiva[1], which models dynamic, multidimensional ground/foundation heat flow, and moisture transportation at different timescales. But, heuristically this is only really neccessary for single-family residential models, since the impact of the ground is fairly marginal for large, multi-storey commercial buildings. In fact, the <a href="https://github.com/ladybug-tools/uwg">UWG</a> doesn’t even model ground heat transfer for its building energy models, although it does model the ground temperature to model the amount of energy needed for service hot water.
+</div>
 <!-- autoescape off to allow images. Debug why safe filter isn't working
      ref for indent: https://jinja.palletsprojects.com/en/master/templates/#indent -->
 <body>

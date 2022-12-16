@@ -41,43 +41,48 @@
 <span class="nbk_directive"><i>22/06/30 - Newton&#39;s Law of Cooling Derivation</i></span>
 
 <div class="skinny_math">
-<b>Spatial energy transfer</b>
+22/12/01: This is a work in progress. I've redrafted the first half of this note to keep track of the contribution of work, under constant pressure, to heat, but this needs to be repeated in the second half.
+
+<b>Spatial: Change in rate of heat across surfaces</b>
 $$
 \begin{flalign}
-Q_x &= k A \frac{dT}{dx}
-  &\text{  [W]} &\\
+\frac{dQ}{dt} &= -k A \frac{dT}{dx} &\text{  [W]} &\\
+\frac{ \partial Q }{ \partial t } &= -k A \frac{ \partial^2 T }{ \partial x^2 } &\text{ [W]} &\\
 \end{flalign}
 $$
-<b>Temporal energy transfer</b>
+Note that \(\frac{dQ}{dt} = \frac{Q}{\Delta{t}}\) since this only represents rate of heat in a steady-state condition. To account for transient-state where rate of heat changes across two dx, we take the second derivative, and representing the second line as a PDE
+
+<b>Temporal: Change in rate of heat within volume over time</b>
 $$
 \begin{flalign}
-Q_t &= \frac{dU}{dt}
-  &\text{  [J/s]} &\\
-&= C \rho V \frac{dT}{dt}
+\frac{ \partial Q }{ \partial t } &= \frac{ \partial (dU - W) }{ \partial t }
   &\text{  [W]} &\\
-\\
+&= \frac{ \partial \left(dU - (-PdV)\right) }{ \partial t }
+    \text{, assume constant pressure}
+    &\text{ [W]} &\\
+&= \frac{ \partial H}{ \partial t}
+    &\text{ [W]} &\\
+&= C_p \rho V \frac{ \partial T}{ \partial t }
+    \text{, } C_p \text{ is constant pressure heat capacity}
+    &\text{  [W]} &\\
 \end{flalign}
-$$The energy balance states the total change in heat over distance dU/dx at both boundaries of a 1D element equals the change in heat over time dU/dt.
-
-Derive thermal energy rates \(\frac{dU}{dt}\), \(\frac{dU}{dx}\) from the first law of thermodynamics.
-
+$$
+Equating these two with an energy balance illustrates that the rate of heat accumulated in an infinitesimal volume, is equal to the derivative of its rate of heat through its surfaces (or the second derivative of heat through a surface), at an infinitesimal unit of time.
 
 <b>Energy Balance</b>
 $$
 \begin{flalign}
-&dU = dQ \cdot dt &\text{ [J]} &\\
-\\
-&\text{ where: } dQ = \frac{d}{dx} \frac{dU}{dx} &\\
-\\
-&\frac{dU}{dt} = \frac{d}{dx} \frac{dU}{dx} &\text{ [W]} &\\
-\\
-&\text{where: }
-  \frac{dU}{dt} = C \rho V \frac{dT}{dt} \text{ and }
-  \frac{d}{dx} \frac{dU}{dx} = d\left( k A \frac{dT}{dx} \right) &\\
+C_p \rho V \frac{ \partial T}{ \partial t } &= -k A \frac{ \partial^2 T }{ \partial x^2 }
+  &\text{  [W]} &\\
+C_p \rho (A \Delta{x}) \frac{ \partial T}{ \partial t } &= -k A \frac{ \partial^2 T }{ \partial x^2 }
+  &\text{  [W]} &\\
+\frac{ \partial T}{ \partial t }
+  &= \left( \frac{-k }{C_p \rho} \right ) \cdot \frac{ \partial^2 T }{ \partial x^2 }
+  &\text{  [W]} &\\
 \end{flalign}
 $$
 Assume the element's spatial temperature distribution is uniform, meaning the core of the element will always be the same temperature as it's surface, the mass \(\rho V \text{ [kg]}\) can be removed from eqn (2).
-
+TODO: derive out the extra dx.
 
 <b>Lumped Assumptions</b>
 $$
@@ -133,6 +138,7 @@ $$
 \end{flalign}
 $$
 </div>
+
 <!-- autoescape off to allow images. Debug why safe filter isn't working
      ref for indent: https://jinja.palletsprojects.com/en/master/templates/#indent -->
 <body>

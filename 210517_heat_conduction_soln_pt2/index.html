@@ -38,18 +38,27 @@
 <span class="nbk_comment">by Saeran Vasanthakumar</span>
 <span class="_doc_sep">---</span>
 
-<span class="nbk_directive"><i>21/05/17 - Solving Heat Conduction Part II</i></span>
+<span class="nbk_directive"><i>21/05/17 - Numerical Models of Heat Transfer</i></span>
 
-<img src="/static/images/210517_heat_conduction/1d_transient.PNG" alt="" width="400">
+<div class="skinny_math">
+Here are four models of heat transfer, represented numerically, and analytically by the diffusion partial differential equation (PDE). The methods are primarily referenced from Cengel's[1] <i>Heat and Mass Transfer</i> chapters on numerical methods[1].
 
-<img src="/static/images/210517_heat_conduction/2d_transient.PNG" alt="" width="400">
+First are the numerical representations of transient heat conduction, written first with for loops and then rewritten with matrix transformations. First, in 1D, with a heat source in the middle iterated for four timesteps:
 
-From there I went to the much more difficult challenge of modeling steady state. Again, I did it in 1D and 2D. However, part of the reason this was such a tricker problem is because steady state heat conduction needs to be solved as a linear system of equations. So there's no for loop solution. The trick is to construct an N x N matrix for N nodes that can model the heat flow into each node from it's four neighbors. So a 2 x 4 lattice of nodes:
+<img src="/static/images/210517_heat_conduction/1d_transient.PNG" alt="" width="500">
+
+Then the same model extended to 2D, again with a heat source in the middle iterated for four timesteps:
+
+<img src="/static/images/210517_heat_conduction/2d_transient.PNG" alt="" width="500">
+
+Next, the models of the steady-state equivalent. While I could have recycled my previous numerical methods again, and just iterated the heat transfer until it converges to its steady-state, I decided to use the more efficient analytical solution, since steady-state systems can be analytically solved as a linear system of equations. The trick here was to construct an N x N matrix for N nodes that can model the heat flow into each node from it's four neighbors.
+
+Here is an example of a 2 x 4 lattice of nodes:
 <code>
     N1 N2 N3 N4
     N5 N6 N7 N8
 </code>
-thus needs to be modeled with the following matrix:
+This can be modeled with the following matrix:
 <code>
         N1  N2  N3  N4  N5  N6  N7  N8
     N1  -4   1   0   0   1   0   0   0  = -Tup - Tleft
@@ -72,16 +81,19 @@ Each row models the energy balance for each node, which, as this is a steady sta
 \end{align}
 \)
 
-This, is a much more elegant way of solving for interior temperatures then the one I wrote about in the previous post, since we can capture all the temperatures with one, parallellized computation. The result looks the same as the transient system, but in this case, has no temporal dimensions:
+Here's the 1D versions, with a constant temperature gradient along the x-axis, with only one instance since there's no temporal dimensions to iterate through:
 
-<img src="/static/images/210517_heat_conduction/1d_steady.PNG" alt="" width="400">
+<img src="/static/images/210517_heat_conduction/1d_steady.PNG" alt="" width="500">
 
-<img src="/static/images/210517_heat_conduction/2d_steady.PNG" alt="" width="400">
+Then the same model extended to 2D, with the tempeature gradient aligned to the y-axis:
+
+<img src="/static/images/210517_heat_conduction/2d_steady.PNG" alt="" width="500">
 
 
 <b>Footnotes</b>
 
 1. Cengel, Yunus A., and Afhsin J. Ghajar. Heat and Mass Transfer: Fundamentals & Applications. New York, 2011. Chapter 5.
+<div class="skinny_math">
 <!-- autoescape off to allow images. Debug why safe filter isn't working
      ref for indent: https://jinja.palletsprojects.com/en/master/templates/#indent -->
 <body>
