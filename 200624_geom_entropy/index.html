@@ -38,43 +38,48 @@
 <span class="nbk_comment">by Saeran Vasanthakumar</span>
 <span class="_doc_sep">---</span>
 
-<span class="nbk_directive"><i>24/06/23 - How to measure &#34;information&#34; in a shape</i></span>
+<span class="nbk_directive"><i>24/06/23 - Thoughts on measuring shape entropy</i></span>
 
 <div class="skinny_math">
-Some thoughts on how simulated sampling can be used to effectively encode and decode polygon geometry. 
+Having an efficient way to "fuzzy match" geometries is something I've been thinking about for a while. Here I sketch out a thought on how simulated sampling can be used to encode and decode polygon geometry information. 
 
-In order to determine how likely two shapes are the same (fuzzy matching) we define the likelihood distribution as \(p(d|shp)\). Normalizing by base rate of data/shape occurence:
+In order to determine how likely two shapes are the same, we can sample data \(d\) as points from one shape, and then calculate the likelihood of those points belonging to the other shape \(shp\): 
 
-\(\begin{align} 
-& p(d|shp) \cdot \frac{p(shp)}{\sum_i{p(shp_i) \cdot p(d|shp_i)}}
-= \frac{p(d \wedge shp_a)}{p(d)} \\
-\end{align} \)
-where: 
 \( \begin{align}
 &d &&= \set{pt_1, pt_2, pt_3,...pt_n} \text{,  data} \\
 &p(shp_i) &&= area \text{ %,  parameter} \\
 \end{align} \)
 
-The most intuitive way to think of the likelihood distribution is as the SDF (for unit circle at origin),
+This can be formalized as a likelihood distribution[1] as \(p(d|shp)\), and calculated as the Signed Distance Function (SDF) from shape edges[2] for the given sampled points. The SDF ensures that as points gets further away from the shape edge, it exponentially decays to zero. For a unit circle at origin the likelihood function is:
 
 \( \begin{align}
 p(pt|shp) &= N( \sqrt{ pt_x^2 + pt_y^2 }\text{,  } 1 ), \\ 
 &= \frac{ exp[-rad / 2 ] }{ \sqrt(2 \pi) }\\ 
 \end{align} \)
 
-So as the pt gets further away from the radius, it exp decays to zero. We can then measure the entropy of point scatter,
+Now that we have formalized the relationships between shapes as probability distributions, we can use this to calculate the entropy of the data by substituting it into the entropy formula:
+
 \( \begin{align}
 H(data) &= \sum_i{ p(pt_i|shp) log( 1 / p(pt_i|shp) ) } \\
 &= \sum_i{ p(pt_i|shp) log( N ) } \\
 \end{align} \)   
 
-So that, if \(p(pt_i|shp)\) cuts across the boundary, it's low entropy, but if all points are scattered away from the boundary, there's no peak, and its high entropy. Thus - as they put it in information theory - boundaries contain the most information. 
+Let's check if the use of the SDF results in an intuitive measure of entropy for different kinds of data. According to the formula, if \(p(pt_i|shp)\) cuts across the shape boundary, we get a low value, but if all points are scattered far away from the boundary, there's no peak, and its a high value. 
 
-Technically, corners are even better, since in a 2D probability distribution edge gaussians have highly correlated x, y data along the edge axis (or dominant eigenvector of the covariance matrix \(X^T X\)). However, generating a shape from corner points seems to require additional information, like an adjacency matrix, which adds inflexibility. 
+Thus, sampled points densely clustered along the other shape's boundary are low entropy, containing a lot of information, while points far away, or uniformly scattered are high entropy, containing little information. 
 
-So sampling from a model of polygon edges will allow you to derive a lot of polygon information for the least amount of sample draws. 
+This aligns with the notion in information theory that boundaries contain the most information. So sampling from a model of polygon edges will allow you to derive a lot of polygon information for the least amount of sample draws. 
 
-</div>
+<b>Footnotes</b>
+
+1. The likelihood needs to be contextualized by normalizing the probability of the shape and data occurring, resulting in the conditional probability \(p(shp|d)\): 
+
+\(\begin{align} 
+& p(d|shp) \cdot \frac{p(shp)}{\sum_i{p(shp_i) \cdot p(d|shp_i)}}
+= \frac{p(d \wedge shp_a)}{p(d)} \\
+\end{align} \)
+
+2. Technically, corners are even better, since in a 2D probability distribution edge gaussians have highly correlated x, y data along the edge axis (or dominant eigenvector of the covariance matrix \(X^T X\)). However, generating a shape from corner points seems to require additional information, like an adjacency matrix, which adds inflexibility. 
 
 <!-- autoescape off to allow images. Debug why safe filter isn't working
      ref for indent: https://jinja.palletsprojects.com/en/master/templates/#indent -->
