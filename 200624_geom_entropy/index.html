@@ -41,24 +41,22 @@
 <span class="nbk_directive"><i>24/06/23 - Thoughts on measuring shape entropy</i></span>
 
 <div class="skinny_math">
+
 Having an efficient way to "fuzzy match" geometries is something I've been thinking about for a while. Here I sketch out a thought on how simulated sampling can be used to encode and decode polygon geometry information. 
 
-In order to determine how likely two shapes are the same, we can sample data \(d\) as points from one shape, and then calculate the likelihood of those points belonging to the other shape \(shp\): 
-
+In order to determine how likely two shapes are the same, we can sample data \(d)\ as points from one shape, and then calculate the likelihood of those points belonging to the other shape \(shp)\: 
 \( \begin{align}
 &d &&= \set{pt_1, pt_2, pt_3,...pt_n} \text{,  data} \\
 &p(shp_i) &&= area \text{ %,  parameter} \\
 \end{align} \)
 
 This can be formalized as a likelihood distribution[1] as \(p(d|shp)\), and calculated as the Signed Distance Function (SDF) from shape edges[2] for the given sampled points. The SDF ensures that as points gets further away from the shape edge, it exponentially decays to zero. For a unit circle at origin the likelihood function is:
-
 \( \begin{align}
 p(pt|shp) &= N( \sqrt{ pt_x^2 + pt_y^2 }\text{,  } 1 ), \\ 
 &= \frac{ exp[-rad / 2 ] }{ \sqrt(2 \pi) }\\ 
 \end{align} \)
 
 Now that we have formalized the relationships between shapes as probability distributions, we can use this to calculate the entropy of the data by substituting it into the entropy formula:
-
 \( \begin{align}
 H(data) &= \sum_i{ p(pt_i|shp) log( 1 / p(pt_i|shp) ) } \\
 &= \sum_i{ p(pt_i|shp) log( N ) } \\
@@ -73,7 +71,6 @@ This aligns with the notion in information theory that boundaries contain the mo
 <b>Footnotes</b>
 
 1. The likelihood needs to be contextualized by normalizing the probability of the shape and data occurring, resulting in the conditional probability \(p(shp|d)\): 
-
 \(\begin{align} 
 & p(d|shp) \cdot \frac{p(shp)}{\sum_i{p(shp_i) \cdot p(d|shp_i)}}
 = \frac{p(d \wedge shp_a)}{p(d)} \\

@@ -38,23 +38,39 @@
 <span class="nbk_comment">by Saeran Vasanthakumar</span>
 <span class="_doc_sep">---</span>
 
-    
-    <span class="nbk_comment">24/06/23 - <a href='200624_geom_entropy/index.html'>Thoughts on measuring shape entropy</a></span>
-    
-    <span class="nbk_comment">24/04/09 - <a href='240409_defns_entropy/index.html'>Entropy, Cross entropy, and Relative entropy definitions</a></span>
-    
-    <span class="nbk_comment">22/06/30 - <a href='220630_newton_law_cooling/index.html'>Newton&#39;s Law of Cooling Derivation</a></span>
-    
-    <span class="nbk_comment">21/07/07 - <a href='210707_Appa/index.html'>அப்பா</a></span>
-    
-    <span class="nbk_comment">21/05/17 - <a href='210517_heat_conduction_soln_pt2/index.html'>Numerical Models of Heat Transfer</a></span>
-    
-    <span class="nbk_comment">20/12/11 - <a href='201211_ground_heat_transfer/index.html'>Ground Heat Transfer</a></span>
-    
-    <span class="nbk_comment">20/09/22 - <a href='200922_regression_norm_eqn/index.html'>Linear Regression as Geometric Projection</a></span>
-    
-<body>
+<span class="nbk_directive"><i>24/04/09 - Entropy, Cross entropy, and Relative entropy definitions</i></span>
 
+<div class="skinny_math">
+
+Given,
+\(\begin{flalign}
+p,q  &= p(x), q(y) \\ 
+Hp   &= \text{Entropy} \\ 
+Hp,q &= \text{Cross-entropy} \\ 
+Dp,q &= \text{Relative-Entropy/KL-Divergence} \\
+\end{flalign}\)
+
+\(\begin{flalign}
+H_p &= -\sum_p{ 1 / lnp } \\ 
+&= E_p[lnp] \\
+\\
+H_{p,q} &= -\sum_p{ 1 / lnq } \\
+&= E_p[lnq] \\
+\\
+D_{p|q} &= H(p,q) - H(p) \\
+&= E_p[lnp] - E_p[lnq] \\
+&= E_p[ln(p / q)] \\
+\end{flalign}\)
+So,  
+    - \(Hp\) is the average of \(ln(p)\), weighted by \(p\).
+    - \(Hpq\) is the average of \(ln(q)\), weighted by \(p\).
+    - \(Dpq\) is the average of the log odds ratio \(ln(p/q)\), 
+      assuming \(q=1-p\).
+</div>
+
+<!-- autoescape off to allow images. Debug why safe filter isn't working
+     ref for indent: https://jinja.palletsprojects.com/en/master/templates/#indent -->
+<body>
 <span class="_doc_sep">---</span>
 <span class="nbk_grey">email: saeranv @ gmail dot com</span>
 <span class="nbk_grey">git: <a href="https://github.com/saeranv/" style="color:grey;">github.com/saeranv</a></span>
